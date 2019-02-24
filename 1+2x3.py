@@ -8,6 +8,6 @@ def f():
     return a
 
 def out(a):
-    print("1+2=", a)
+    print("1+2*3=", a)
 
 main()
