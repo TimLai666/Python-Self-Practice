@@ -6,7 +6,23 @@ def main():
         print("輸入成績", i + 1, ":", end = "")
         scorenum = int(input())
         score.append(scorenum)
+    sortnum(score, n)
+    maxmin(score)
     add(score, n)
+
+
+def maxmin(score):
+    biggest = max(score)
+    smallest = min(score)
+    print("最高分:", biggest, " 最低分:", smallest)
+
+
+def sortnum(score, n):
+    score.sort()
+    score.reverse()
+    print("成績依序為")
+    for i in range(n):
+        print(score[i])
 
     
 def add(score, n):
