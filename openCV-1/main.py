@@ -3,10 +3,12 @@ import random
 import cv2
 import numpy as np
 
+
 # img = cv2.imread('colorcolor.jpg')
 # img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
 # cv2.imshow('img', img)
 # cv2.waitKey(0)
+
 
 # cap = cv2.VideoCapture('thumb.mp4')
 # while True:
@@ -20,6 +22,7 @@ import numpy as np
 #     if cv2.waitKey(10) == ord('q'):
 #         break
 
+
 # cap = cv2.VideoCapture(0)
 # while True:
 #     ret, frame = cap.read()
@@ -32,10 +35,12 @@ import numpy as np
 #     if cv2.waitKey(10) == ord('q'):
 #         break
 
+
 # img = cv2.imread('colorcolor.jpg')
 # print(img)
 # print(type(img))
 # print(img.shape)
+
 
 # img = np.empty((300, 300, 3), np.uint8)
 # for row in range(300):
@@ -47,6 +52,7 @@ import numpy as np
 # cv2.imshow('img', img)
 # cv2.waitKey(0)
 
+
 # img = cv2.imread('colorcolor.jpg')
 # for row in range(300):
 #     for col in range(img.shape[1]):
@@ -57,8 +63,22 @@ import numpy as np
 # cv2.imshow('img', img)
 # cv2.waitKey(0)
 
+
+# img = cv2.imread('colorcolor.jpg')
+# newImg = img[:150, 200:400]
+# cv2.imshow('img', img)
+# cv2.imshow('newImg', newImg)
+# cv2.waitKey(0)
+
+
 img = cv2.imread('colorcolor.jpg')
-newImg = img[:150, 200:400]
-cv2.imshow('img', img)
-cv2.imshow('newImg', newImg)
+img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
+cv2.imshow('img',img)
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray',gray)
+
+blur = cv2.GaussianBlur(img,(3,3),0)
+cv2.imshow('blur',blur)
 cv2.waitKey(0)
+
