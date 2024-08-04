@@ -71,14 +71,33 @@ import numpy as np
 # cv2.waitKey(0)
 
 
-img = cv2.imread('colorcolor.jpg')
-img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
-cv2.imshow('img',img)
+# img = cv2.imread('colorcolor.jpg')
+# img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
+# cv2.imshow('img',img)
+#
+# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# cv2.imshow('gray',gray)
+#
+# blur = cv2.GaussianBlur(img,(15,15),10)
+# cv2.imshow('blur',blur)
+#
+# canny = cv2.Canny(img, 100, 250)
+# cv2.imshow('canny',canny)
+#
+# kernel = np.ones((10,10), np.uint8)
+# dilate = cv2.dilate(canny, kernel, iterations=1)
+# cv2.imshow('dilate',dilate)
+#
+# kernel1 = np.ones((10,10), np.uint8)
+# erode = cv2.erode(dilate,kernel1,iterations=1)
+# cv2.imshow('erode',erode)
+# cv2.waitKey(0)
 
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-cv2.imshow('gray',gray)
 
-blur = cv2.GaussianBlur(img,(3,3),0)
-cv2.imshow('blur',blur)
+img = np.zeros((600, 600, 3), np.uint8)
+cv2.line(img, (0, 0), (img.shape[1], img.shape[0]), (0, 255, 0), 2)
+cv2.rectangle(img, (0,0), (400, 300), (0, 0, 255), cv2.FILLED)
+cv2.circle(img, (300, 400), 30, (255, 0, 0), cv2.FILLED)
+cv2.putText(img, 'hello', (100, 500), cv2.FONT_HERSHEY_SIMPLEX, 1, (150,150,150), 2)
+cv2.imshow('img', img)
 cv2.waitKey(0)
-
