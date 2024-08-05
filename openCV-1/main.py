@@ -102,37 +102,78 @@ import numpy as np
 # cv2.imshow('img', img)
 # cv2.waitKey(0)
 
-def empty():
-    return 0
 
-img = cv2.imread('XiWinnie.jpg')
-img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
+# def empty():
+#     return 0
+#
+# img = cv2.imread('XiWinnie.jpg')
+# img = cv2.resize(img,(0,0), fx=0.5, fy=0.5)
+#
+# cv2.namedWindow('TrackBar')
+# cv2.resizeWindow('TrackBar', 640, 320)
+# cv2.createTrackbar('Hue Min', 'TrackBar', 0, 179, empty)
+# cv2.createTrackbar('Hue Max', 'TrackBar', 179, 179, empty)
+# cv2.createTrackbar('Sat Min', 'TrackBar', 0, 255, empty)
+# cv2.createTrackbar('Sat Max', 'TrackBar', 255, 255, empty)
+# cv2.createTrackbar('Val Min', 'TrackBar', 0, 255, empty)
+# cv2.createTrackbar('Val Max', 'TrackBar', 255, 255, empty)
+#
+# hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+# while True:
+#     h_min = cv2.getTrackbarPos('Hue Min', 'TrackBar')
+#     h_max = cv2.getTrackbarPos('Hue Max', 'TrackBar')
+#     s_min = cv2.getTrackbarPos('Sat Min', 'TrackBar')
+#     s_max = cv2.getTrackbarPos('Sat Max', 'TrackBar')
+#     v_min = cv2.getTrackbarPos('Val Min', 'TrackBar')
+#     v_max = cv2.getTrackbarPos('Val Max', 'TrackBar')
+#
+#     lower = np.array([h_min, s_min, v_min])
+#     upper = np.array([h_max, s_max, v_max])
+#     mask = cv2.inRange(hsv, lower, upper)
+#     result = cv2.bitwise_and(img, img, mask=mask)
+#
+#     cv2.imshow('img', img)
+#     cv2.imshow('hsv',hsv)
+#     cv2.imshow('mask',mask)
+#     cv2.imshow('result',result)
+#     cv2.waitKey(1)
 
-cv2.namedWindow('TrackBar')
-cv2.resizeWindow('TrackBar', 640, 320)
-cv2.createTrackbar('Hue Min', 'TrackBar', 0, 179, empty)
-cv2.createTrackbar('Hue Max', 'TrackBar', 179, 179, empty)
-cv2.createTrackbar('Sat Min', 'TrackBar', 0, 255, empty)
-cv2.createTrackbar('Sat Max', 'TrackBar', 255, 255, empty)
-cv2.createTrackbar('Val Min', 'TrackBar', 0, 255, empty)
-cv2.createTrackbar('Val Max', 'TrackBar', 255, 255, empty)
 
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-while True:
-    h_min = cv2.getTrackbarPos('Hue Min', 'TrackBar')
-    h_max = cv2.getTrackbarPos('Hue Max', 'TrackBar')
-    s_min = cv2.getTrackbarPos('Sat Min', 'TrackBar')
-    s_max = cv2.getTrackbarPos('Sat Max', 'TrackBar')
-    v_min = cv2.getTrackbarPos('Val Min', 'TrackBar')
-    v_max = cv2.getTrackbarPos('Val Max', 'TrackBar')
+# img = cv2.imread('shape.jpg')
+# imgContour = img.copy()
+# img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# canny = cv2.Canny(img, 150, 200)
+# contours, hierarchy = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+#
+# for cnt in contours:
+#     cv2.drawContours(imgContour, cnt, -1, (0, 255, 0), 4)
+#     area = cv2.contourArea(cnt)
+#     if area > 500:
+#         peri = cv2.arcLength(cnt, True)
+#         vertices = cv2.approxPolyDP(cnt, peri * 0.02, True)
+#         corners = len(vertices)
+#         x, y ,w , h = cv2.boundingRect(vertices)
+#         cv2.rectangle(imgContour, (x, y), (x+w, y+h), (0, 0, 255), 2)
+#         if corners == 3:
+#             cv2.putText(imgContour, 'triangle', (x, y-5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+#         elif corners == 4:
+#             cv2.putText(imgContour, 'rectangle', (x, y-5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+#         elif corners == 5:
+#             cv2.putText(imgContour, 'pentagon', (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+#         elif corners >= 6:
+#             cv2.putText(imgContour, 'circle', (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+#
+# cv2.imshow('img', img)
+# cv2.imshow('canny', canny)
+# cv2.imshow('contours', imgContour)
+# cv2.waitKey(0)
 
-    lower = np.array([h_min, s_min, v_min])
-    upper = np.array([h_max, s_max, v_max])
-    mask = cv2.inRange(hsv, lower, upper)
-    result = cv2.bitwise_and(img, img, mask=mask)
 
-    cv2.imshow('img', img)
-    cv2.imshow('hsv',hsv)
-    cv2.imshow('mask',mask)
-    cv2.imshow('result',result)
-    cv2.waitKey(1)
+img = cv2.imread('lenna.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceRect = faceCascade.detectMultiScale(gray, 1.1, 3)
+for (x,y,w,h) in faceRect:
+    cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+cv2.imshow('img', img)
+cv2.waitKey(0)
